@@ -1,6 +1,6 @@
 # IaC — Mastère 4A
 
-Module Infrastructure as Code — TP 1.1 : Git, fondations.
+Module Infrastructure as Code — TP 1.1 : Git, fondations et bonnes pratiques.
 
 ## Structure
 
