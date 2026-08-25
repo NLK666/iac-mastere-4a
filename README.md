@@ -10,26 +10,8 @@ Module Infrastructure as Code — TP 1.1 : Git, fondations et bonnes pratiques p
 
 ## Observations
 
-Après avoir modifié `README.md` sans exécuter `git add`, `git status` affiche
-le fichier sous « Modifications qui ne sont pas indexées pour la validation ».
+J'ai modifié le README sans faire git add après, et j'ai lancé git status pour voir. Le fichier apparaît dans la partie modifications non indexées pour la validation, donc il est dans le répertoire de travail, pas encore dans l'index. Git voit que le fichier a changé par rapport au dernier commit mais comme je n'ai pas fait git add, la modif n'est pas prête à être validée. Il reste quand même suivi puisqu'il existait déjà avant dans un commit, un fichier jamais ajouté serait plutôt classé dans fichiers non suivis.
 
-Le fichier se trouve donc dans le **répertoire de travail** (*working
-directory*), et non dans l'**index** (*staging area*). Git a détecté l'écart
-entre le fichier sur le disque et la version enregistrée dans le dernier
-commit (HEAD), mais cette modification n'est pas encore préparée pour le
-prochain commit.
+Du coup si je résume, le fichier passe par le répertoire de travail quand on le modifie, ensuite l'index avec git add, et enfin le dépôt local une fois qu'on fait git commit.
 
-| Zone | Contenu | Commande pour en sortir |
-|---|---|---|
-| Répertoire de travail | fichiers modifiés sur le disque | `git add` |
-| Index (staging area) | modifications prêtes à être validées | `git commit` |
-| Dépôt local | commits enregistrés dans l'historique | `git push` |
-
-Le fichier reste « suivi » (*tracked*) car il existe déjà dans un commit ;
-un fichier jamais versionné apparaîtrait sous « Fichiers non suivis »
-(*untracked*).
-
-Second constat, sur le `.gitignore` : la règle `.env` ne filtre que le fichier
-portant exactement ce nom. Un fichier `secrets.env` passe au travers. Il faut
-écrire `*.env` pour couvrir le cas, et le vérifier avec
-`git check-ignore -v secrets.env` plutôt que de se fier à `git status`.
+J'ai aussi testé un truc avec le gitignore, la ligne .env ne bloque que le fichier qui s'appelle exactement .env, un fichier comme secrets.env n'est pas ignoré avec cette règle. Il faut mettre une étoile devant, donc *.env, pour que ça marche sur tous les fichiers qui finissent par .env. Je l'ai vérifié avec git check-ignore -v secrets.env, c'est plus fiable que de juste regarder git status.
